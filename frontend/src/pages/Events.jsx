@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 
-export const LandingPage = () => {
+export const Events = () => {
   return (
     <>
       <Navbar />
