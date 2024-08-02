@@ -1,14 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import logo from "../assets/logo.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Navbar = () => {
+  const [user, setUser] = useState({});
+
   const location = useLocation();
-  const user = {
-    name: "John Doe",
-    avatar:
-      "https://cdn.iconscout.com/icon/free/png-512/free-avatar-380-456332.png?f=webp&w=256",
-  }; // Replace with actual user data
+  // const user = {
+  //   name: "John Doe",
+  //   avatar: "",
+  // }; // Replace with actual user data
 
   const navItems = [
     { name: "Dashboard", path: "/" },
@@ -16,6 +19,26 @@ const Navbar = () => {
     { name: "My Registrations", path: "/my-registrations" },
     { name: "Calendar", path: "/calendar" },
   ];
+
+  const isAuthenticated = true; // Replace with actual authentication status
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/users/me", {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      console.log(res.data);
+      setUser(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <nav className="bg-white border-b border-gray-200">
@@ -67,24 +90,26 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="ml-3 relative">
-              <div>
-                <button
-                  type="button"
-                  className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  id="user-menu-button"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src={user.avatar}
-                    alt=""
-                  />
-                </button>
+            {isAuthenticated ? (
+              <div className="ml-3 relative">
+                <div>
+                  <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                    <span className="font-medium text-gray-600 dark:text-gray-300">
+                      {user.fullName}
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="ml-3">
+                <Link
+                  to="/register"
+                  className="inline-block px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
