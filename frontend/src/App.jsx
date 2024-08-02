@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Register from "./components/Register";
+import { Register } from "./components/Register";
 import { LandingPage } from "./pages/LandingPage";
 import { Events } from "./pages/Events";
 import { MyRegistration } from "./pages/MyRegistration";

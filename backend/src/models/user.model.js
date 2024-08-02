@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
       return this.role === "student";
     },
     unique: true,
+    sparse: true, // This allows null values and only creates an index for non-null values
   },
   stream: {
     type: String,
