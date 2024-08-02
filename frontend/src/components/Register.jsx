@@ -40,8 +40,8 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <h2 className="text-2xl font-semibold mb-6">Register</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 p-4">
+      <h2 className="text-2xl font-semibold mb-6">REGISTER</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6"
@@ -206,7 +206,7 @@ export const Register = () => {
       <p className="mt-4">
         Already have an account?{" "}
         <Link to="/login" className="text-blue-500 hover:underline">
-          Sign In
+          Log In
         </Link>
       </p>
     </div>
