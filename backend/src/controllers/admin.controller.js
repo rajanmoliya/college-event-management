@@ -100,13 +100,13 @@ exports.getDashboardData = async (req, res) => {
     const userCount = await User.countDocuments({ role: "student" });
     const eventCount = await Event.countDocuments();
     const registrationCount = await Registration.countDocuments();
-    const recentEvents = await Event.find().sort({ createdAt: -1 }).limit(5);
+    const allEvents = await Event.find().sort({ createdAt: -1 });
 
     res.json({
       userCount,
       eventCount,
       registrationCount,
-      recentEvents,
+      allEvents,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

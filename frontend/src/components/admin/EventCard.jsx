@@ -8,7 +8,7 @@ const EventCard = ({ event }) => (
       <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
       <p className="text-gray-600 mb-4">{event.description}</p>
       <div className="flex justify-between text-sm text-gray-500">
-        <p>{format(new Date(event.date), "MMM d, yyyy")}</p>
+        <p>{format(new Date(event.date), "dd-MMM-yyyy")}</p>
         <p>{event.time}</p>
       </div>
       <p className="text-sm text-gray-500 mt-2">{event.location}</p>

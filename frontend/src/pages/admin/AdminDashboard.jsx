@@ -63,9 +63,9 @@ export const AdminDashboard = () => {
             </div>
 
             {/* Recent Events */}
-            <h2 className="text-2xl font-semibold mb-4">Recent Events</h2>
+            <h2 className="text-2xl font-semibold mb-4">All Events</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {dashboardData.recentEvents.map((event) => (
+              {dashboardData.allEvents.map((event) => (
                 <EventCard key={event._id} event={event} />
               ))}
             </div>
