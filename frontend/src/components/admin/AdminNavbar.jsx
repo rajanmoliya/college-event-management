@@ -3,14 +3,14 @@ import {
   ArrowRightStartOnRectangleIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 import { useEffect, useState } from "react";
-import fetchUser from "../api/fetchUser";
+import fetchUser from "../../api/fetchUser";
 import { useSetRecoilState } from "recoil";
-import { authState } from "../recoil/authState";
-import { logout } from "../utils/auth";
+import { authState } from "../../recoil/authState";
+import { logout } from "../../utils/auth";
 
-const Navbar = () => {
+const AdminNavbar = () => {
   const [user, setUser] = useState({});
 
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { name: "Dashboard", path: "/" },
+    { name: "Dashboard", path: "/admin" },
     { name: "Events", path: "/events" },
     { name: "My Registrations", path: "/my-registrations" },
     { name: "Calendar", path: "/calendar" },
@@ -190,4 +190,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

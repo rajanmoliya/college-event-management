@@ -1,14 +1,14 @@
-import Navbar from "../components/Navbar";
-import { useRecoilValue } from "recoil";
-import { authState } from "../recoil/authState";
-import { LandingPage } from "../components/LandingPage";
 import { useEffect, useState } from "react";
-import fetchUser from "../api/fetchUser";
+import AdminNavbar from "../../components/admin/AdminNavbar";
+import { LandingPage } from "../../components/LandingPage";
+import fetchUser from "../../api/fetchUser";
+import { useRecoilValue } from "recoil";
+import { authState } from "../../recoil/authState";
 
-export const Dashboard = () => {
-  const auth = useRecoilValue(authState);
-
+export const AdminDashboard = () => {
   const [user, setUser] = useState({});
+
+  const auth = useRecoilValue(authState);
 
   useEffect(() => {
     fetchUser().then((data) => setUser(data));
@@ -20,9 +20,9 @@ export const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
+      <AdminNavbar />
+
       <div className="flex justify-center min-h-screen bg-gray-100 p-4">
-        <h1 className="text-4xl font-bold">SDJ EventHub</h1>
         <div>{JSON.stringify(user)}</div>
       </div>
     </>

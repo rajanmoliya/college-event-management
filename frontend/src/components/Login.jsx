@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,6 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,16 +26,23 @@ export const Login = () => {
     try {
       setIsLoading(true);
 
-      const res = await axios.post("http://localhost:5000/api/users/login", {
-        email: data.email,
-        password: data.password,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
+        {
+          email: data.email,
+          password: data.password,
+        }
+      );
 
       const token = res.data.token;
+      const role = res.data.role;
+
       if (token) {
         localStorage.setItem("token", `Bearer ${token}`);
         console.log("Registration successful, token stored.");
-        navigate("/");
+        if (role === "admin") {
+          window.location.href = "/admin";
+        } else window.location.href = "/";
       } else {
         console.error("No token received from the server.");
       }

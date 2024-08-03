@@ -6,6 +6,8 @@ import { Events } from "./pages/Events";
 import { MyRegistration } from "./pages/MyRegistration";
 import { Calander } from "./pages/Calander";
 import { Login } from "./components/Login";
+
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { RecoilRoot } from "recoil";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
             <Route path="/events" element={<Events />} />
             <Route path="/my-registrations" element={<MyRegistration />} />
             <Route path="/calendar" element={<Calander />} />
+
+            <Route path="/admin/" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

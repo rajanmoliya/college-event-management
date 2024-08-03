@@ -1,4 +1,4 @@
-import jwtDecode from "jwt-decode";
+import * as jwtDecode from "jwt-decode";
 
 export const isTokenValid = (token) => {
   if (!token) return false;
@@ -14,3 +14,8 @@ export const isTokenValid = (token) => {
 };
 
 export const getToken = () => localStorage.getItem("token");
+
+export const logout = (setAuthState) => {
+  localStorage.removeItem("token");
+  setAuthState({ isAuthenticated: false, token: null });
+};

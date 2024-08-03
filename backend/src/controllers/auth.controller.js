@@ -52,11 +52,9 @@ exports.register = async (req, res) => {
         !mobileNo ||
         !gender
       ) {
-        return res
-          .status(400)
-          .json({
-            message: "Missing required fields for student registration",
-          });
+        return res.status(400).json({
+          message: "Missing required fields for student registration",
+        });
       }
       userData = {
         ...userData,
@@ -137,7 +135,7 @@ exports.login = async (req, res) => {
       { expiresIn: "1d" },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token, role: user.role });
       }
     );
   } catch (err) {

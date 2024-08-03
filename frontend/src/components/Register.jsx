@@ -47,17 +47,20 @@ export const Register = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post("http://localhost:5000/api/users/register", {
-        fullName: data.fullName,
-        email: data.email,
-        password: data.password,
-        role: data.role,
-        studentId: data.studentId,
-        stream: data.stream,
-        semester: data.semester,
-        mobileNo: data.mobileNo,
-        gender: data.gender,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/register`,
+        {
+          fullName: data.fullName,
+          email: data.email,
+          password: data.password,
+          role: data.role,
+          studentId: data.studentId,
+          stream: data.stream,
+          semester: data.semester,
+          mobileNo: data.mobileNo,
+          gender: data.gender,
+        }
+      );
 
       const token = res.data.token;
 
