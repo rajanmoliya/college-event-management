@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../recoil/userState";
+import { authState } from "../recoil/authState";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -13,6 +16,9 @@ const schema = z.object({
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const setAuthState = useSetRecoilState(authState);
+  const setUserState = useSetRecoilState(userState);
 
   const {
     register,
@@ -40,6 +46,10 @@ export const Login = () => {
       if (token) {
         localStorage.setItem("token", `Bearer ${token}`);
         console.log("Registration successful, token stored.");
+
+        setAuthState({ isAuthenticated: true, token });
+        setUserState({ isAuthenticated: true, token, role });
+
         if (role === "admin") {
           window.location.href = "/admin";
         } else window.location.href = "/";

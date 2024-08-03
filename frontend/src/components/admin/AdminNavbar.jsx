@@ -30,8 +30,8 @@ const AdminNavbar = () => {
 
   const navItems = [
     { name: "Dashboard", path: "/admin" },
-    { name: "Events", path: "/events" },
-    { name: "My Registrations", path: "/my-registrations" },
+    { name: "Events", path: "/admin/events" },
+    { name: "All Registrations", path: "/admin/all-registrations" },
     { name: "Calendar", path: "/calendar" },
   ];
 
@@ -45,7 +45,7 @@ const AdminNavbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/">
+              <Link to="/admin">
                 <img className="h-8 w-auto" src={logo} alt="Logo" />
               </Link>
             </div>
