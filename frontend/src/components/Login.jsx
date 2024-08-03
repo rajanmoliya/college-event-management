@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useState } from "react";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -9,6 +11,10 @@ const schema = z.object({
 });
 
 export const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,8 +23,32 @@ export const Login = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      setIsLoading(true);
+
+      const res = await axios.post("http://localhost:5000/api/users/login", {
+        email: data.email,
+        password: data.password,
+      });
+
+      const token = res.data.token;
+      if (token) {
+        localStorage.setItem("token", `Bearer ${token}`);
+        console.log("Registration successful, token stored.");
+        navigate("/");
+      } else {
+        console.error("No token received from the server.");
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error(
+        "Login failed:",
+        error.response ? setError(error.response.data.message) : error.message
+      );
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -52,11 +82,20 @@ export const Login = () => {
             </span>
           )}
         </div>
+        {error && (
+          <div className="lg:col-span-2 text-center">
+            <span className="text-red-500 text-sm">{error}</span>
+          </div>
+        )}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+          className={
+            isLoading
+              ? "w-full bg-blue-500 text-white py-2 rounded-md cursor-not-allowed"
+              : "w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+          }
         >
-          Login
+          {isLoading ? "Loading..." : "Login"}
         </button>
       </form>
       <p className="mt-4">

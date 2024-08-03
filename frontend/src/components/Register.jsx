@@ -258,9 +258,13 @@ export const Register = () => {
         )}
         <button
           type="submit"
-          className="lg:col-span-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+          className={
+            isLoading
+              ? "lg:col-span-2 bg-blue-500 text-white px-4 py-2 rounded-md cursor-not-allowed"
+              : "lg:col-span-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+          }
         >
-          {isLoading ? "Registering..." : "Register"}
+          {isLoading ? "Loading..." : "Register"}
         </button>
         <div className="lg:col-span-2 text-center">
           Already have an account?{" "}

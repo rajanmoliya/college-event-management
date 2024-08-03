@@ -8,10 +8,6 @@ const Navbar = () => {
   const [user, setUser] = useState({});
 
   const location = useLocation();
-  // const user = {
-  //   name: "John Doe",
-  //   avatar: "",
-  // }; // Replace with actual user data
 
   const navItems = [
     { name: "Dashboard", path: "/" },
