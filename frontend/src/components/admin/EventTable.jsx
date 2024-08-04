@@ -80,7 +80,11 @@ export const EventTable = ({ events, onEdit, onDelete }) => {
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredAndSortedEvents.map((event) => (
               <tr key={event._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap">{event.title}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {event.title.length < 60
+                    ? event.title
+                    : event.title.split(" ").slice(0, 10).join(" ") + "..."}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {format(new Date(event.date), "dd-MMM-yyyy")}
                 </td>

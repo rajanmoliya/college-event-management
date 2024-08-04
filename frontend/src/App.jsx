@@ -11,6 +11,7 @@ import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import { AdminEvents } from "./pages/admin/AdminEvents";
+import EventRegistrations from "./components/admin/EventRegistrations";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
             <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/events" element={<AdminEvents />} />
+              <Route
+                path="/admin/event-registrations/:eventId"
+                element={<EventRegistrations />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>

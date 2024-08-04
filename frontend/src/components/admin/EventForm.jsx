@@ -69,7 +69,7 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
           Title
         </label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
           id="title"
           type="text"
           name="title"
@@ -86,7 +86,7 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
           Description
         </label>
         <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
           id="description"
           name="description"
           value={formData.description}
@@ -111,7 +111,7 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
 
       <div className="mb-4 flex gap-8">
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
           id="date"
           type="date"
           name="date"
@@ -121,7 +121,7 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
         />
 
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
           id="time"
           type="time"
           name="time"
@@ -153,7 +153,7 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
 
       <div className="mb-4 flex gap-8">
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
           id="location"
           type="text"
           name="location"
@@ -163,7 +163,7 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
         />
 
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
           id="category"
           type="text"
           name="category"
