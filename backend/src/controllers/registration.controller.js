@@ -44,12 +44,10 @@ exports.cancelRegistration = async (req, res) => {
     );
 
     if (!registration) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Registration not found or you are not authorized to cancel it",
-        });
+      return res.status(404).json({
+        message:
+          "Registration not found or you are not authorized to cancel it",
+      });
     }
 
     res.json(registration);
@@ -72,7 +70,7 @@ exports.getMyRegistrations = async (req, res) => {
 exports.getEventRegistrations = async (req, res) => {
   try {
     const registrations = await Registration.find({ event: req.params.eventId })
-      .populate("user", "fullName email")
+      .populate("user", "-password")
       .sort({ registrationDate: -1 });
     res.json(registrations);
   } catch (error) {

@@ -94,14 +94,14 @@ export const EventTable = ({ events, onEdit, onDelete }) => {
                 <td className="px-6 py-4 whitespace-nowrap flex gap-2">
                   <button
                     onClick={() => onEdit(event)}
-                    className="text-blue-600 hover:text-blue-900 mr-2"
+                    className="text-blue-700 hover:text-blue-900 mr-2"
                     aria-label="Edit event"
                   >
                     <FaEdit className="h-5 w-5" />
                   </button>
                   <button
                     onClick={() => onDelete(event._id)}
-                    className="text-red-600 hover:text-red-900"
+                    className="text-red-700 hover:text-red-900"
                     aria-label="Delete event"
                   >
                     <FaTrash className="h-5 w-5" />
