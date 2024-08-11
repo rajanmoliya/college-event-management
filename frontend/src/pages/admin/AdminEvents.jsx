@@ -10,7 +10,7 @@ import { EventTable } from "../../components/admin/EventTable";
 
 export const AdminEvents = () => {
   const apiUrl = import.meta.env.PROD
-    ? "/api"
+    ? "https://cems.rajanmoliya.me/api"
     : import.meta.env.VITE_BACKEND_URL;
 
   const auth = useRecoilValue(authState);

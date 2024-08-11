@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const apiUrl = import.meta.env.PROD ? "/api" : import.meta.env.VITE_BACKEND_URL;
+const apiUrl = import.meta.env.PROD
+  ? "https://cems.rajanmoliya.me/api"
+  : import.meta.env.VITE_BACKEND_URL;
 
 export const fetchDashboardData = async () => {
   try {

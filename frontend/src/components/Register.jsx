@@ -31,7 +31,7 @@ const schema = z
 
 export const Register = () => {
   const apiUrl = import.meta.env.PROD
-    ? "/api"
+    ? "https://cems.rajanmoliya.me/api"
     : import.meta.env.VITE_BACKEND_URL;
 
   const [isLoading, setIsLoading] = useState(false);

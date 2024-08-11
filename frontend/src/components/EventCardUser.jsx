@@ -13,7 +13,7 @@ import axios from "axios";
 /* eslint-disable */
 const EventCardUser = ({ event }) => {
   const apiUrl = import.meta.env.PROD
-    ? "/api"
+    ? "https://cems.rajanmoliya.me/api"
     : import.meta.env.VITE_BACKEND_URL;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
