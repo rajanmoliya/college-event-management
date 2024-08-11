@@ -9,7 +9,7 @@ import { FaSort, FaSearch } from "react-icons/fa";
 
 const EventRegistrations = () => {
   const apiUrl = import.meta.env.PROD
-    ? "https://cems.rajanmoliya.me/api"
+    ? "https://cems.rajanmoliya.me"
     : import.meta.env.VITE_BACKEND_URL;
 
   const [registrations, setRegistrations] = useState([]);
