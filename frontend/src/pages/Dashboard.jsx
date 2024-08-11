@@ -9,6 +9,10 @@ import axios from "axios";
 import EventCardUser from "../components/EventCardUser";
 
 export const Dashboard = () => {
+  const apiUrl = import.meta.env.PROD
+    ? "/api"
+    : import.meta.env.VITE_BACKEND_URL;
+
   const auth = useRecoilValue(authState);
 
   const [user, setUser] = useState({});
@@ -21,14 +25,11 @@ export const Dashboard = () => {
   const [events, setEvents] = useState([]);
 
   const fetchEvents = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/events/search`,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+    const response = await axios.get(`${apiUrl}/api/events/search`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
 
     setEvents(response.data);
   };

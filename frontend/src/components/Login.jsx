@@ -14,6 +14,10 @@ const schema = z.object({
 });
 
 export const Login = () => {
+  const apiUrl = import.meta.env.PROD
+    ? "/api"
+    : import.meta.env.VITE_BACKEND_URL;
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -32,13 +36,10 @@ export const Login = () => {
     try {
       setIsLoading(true);
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/login`,
-        {
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const res = await axios.post(`${apiUrl}/api/users/login`, {
+        email: data.email,
+        password: data.password,
+      });
 
       const token = res.data.token;
       const role = res.data.role;

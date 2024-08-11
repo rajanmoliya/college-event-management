@@ -8,6 +8,10 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaSort, FaSearch } from "react-icons/fa";
 
 const EventRegistrations = () => {
+  const apiUrl = import.meta.env.PROD
+    ? "/api"
+    : import.meta.env.VITE_BACKEND_URL;
+
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -20,9 +24,7 @@ const EventRegistrations = () => {
     const fetchRegistrations = async () => {
       try {
         const response = await axios.get(
-          `${
-            import.meta.env.VITE_BACKEND_URL
-          }/api/registrations/event/${eventId}`,
+          `${apiUrl}/api/registrations/event/${eventId}`,
           {
             headers: {
               Authorization: localStorage.getItem("token"),

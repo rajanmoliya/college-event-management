@@ -9,6 +9,10 @@ import { EventForm } from "../../components/admin/EventForm";
 import { EventTable } from "../../components/admin/EventTable";
 
 export const AdminEvents = () => {
+  const apiUrl = import.meta.env.PROD
+    ? "/api"
+    : import.meta.env.VITE_BACKEND_URL;
+
   const auth = useRecoilValue(authState);
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -22,15 +26,11 @@ export const AdminEvents = () => {
 
   const handleCreate = async (event) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/admin/events`,
-        event,
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.post(`${apiUrl}/api/admin/events`, event, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
       setEvents([response.data, ...events]); // Add new event to the top of the list
       setSelectedEvent(null);
     } catch (error) {
@@ -41,7 +41,7 @@ export const AdminEvents = () => {
   const handleUpdate = async (event) => {
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/admin/events/${event._id}`,
+        `${apiUrl}/api/admin/events/${event._id}`,
         event,
         {
           headers: {
@@ -59,14 +59,11 @@ export const AdminEvents = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/admin/events/${id}`,
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
+      await axios.delete(`${apiUrl}/api/admin/events/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
       setEvents(events.filter((event) => event._id !== id));
     } catch (error) {
       console.error("Error deleting event:", error);

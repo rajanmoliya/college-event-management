@@ -12,6 +12,10 @@ import axios from "axios";
 
 /* eslint-disable */
 const EventCardUser = ({ event }) => {
+  const apiUrl = import.meta.env.PROD
+    ? "/api"
+    : import.meta.env.VITE_BACKEND_URL;
+
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const toggleDescription = () => setShowFullDescription(!showFullDescription);
@@ -21,9 +25,7 @@ const EventCardUser = ({ event }) => {
   const handleRegisterForEvent = async () => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/users/events/${
-          event._id
-        }/register`,
+        `${apiUrl}/api/users/events/${event._id}/register`,
         {},
         {
           headers: {

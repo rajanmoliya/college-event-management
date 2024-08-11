@@ -1,15 +1,13 @@
 import axios from "axios";
 
+const apiUrl = import.meta.env.PROD ? "/api" : import.meta.env.VITE_BACKEND_URL;
 const fetchUser = async () => {
   try {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/users/me`,
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+    const { data } = await axios.get(`${apiUrl}/api/users/me`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
     console.log(data);
 
     return data;
