@@ -35,6 +35,12 @@ const AdminNavbar = () => {
     { name: "Calendar", path: "/calendar" },
   ];
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   useEffect(() => {
     fetchUser().then((data) => setUser(data));
   }, []);
@@ -90,13 +96,57 @@ const AdminNavbar = () => {
             </div>
 
             <div className="ml-3 relative">
-              <div>
-                <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-blue-100 rounded-full">
-                  <span className="font-medium text-gray-600  uppercase">
-                    {user.fullName?.charAt(0)}
-                  </span>
-                </div>
+              {/* Profile DropDown Starts */}
+
+              <div className="relative inline-block text-left">
+                <button
+                  id="dropdownUserAvatarButton"
+                  onClick={toggleDropdown}
+                  className="flex text-sm bg-gray-800 rounded-full md:me-0 "
+                  type="button"
+                >
+                  <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-blue-100 rounded-full">
+                    <span className="font-medium text-gray-600 uppercase">
+                      {user.fullName?.charAt(0)}
+                    </span>
+                  </div>
+                </button>
+
+                {dropdownOpen && (
+                  <div
+                    id="dropdownAvatar"
+                    className="absolute right-0 mt-2 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+                  >
+                    <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                      <div>{user?.fullName}</div>
+                      <div className="font-medium truncate">{user?.email}</div>
+                    </div>
+                    <ul
+                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownUserAvatarButton"
+                    >
+                      <li>
+                        <Link
+                          to={"/profile/settings"}
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Profile Settings
+                        </Link>
+                      </li>
+                    </ul>
+                    <div className="py-2">
+                      <Link
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        onClick={handleLogout}
+                      >
+                        Log out
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Profile DropDown Ends */}
             </div>
           </div>
           <div className="flex items-center sm:hidden">

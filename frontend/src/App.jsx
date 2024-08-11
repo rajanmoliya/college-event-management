@@ -19,12 +19,16 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/my-registrations" element={<MyRegistration />} />
-            <Route path="/calendar" element={<Calander />} />
+            <Route path="/" element={<Dashboard />} />
+
+            <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
+              <Route path="/events" element={<Events />} />
+              <Route path="/my-registrations" element={<MyRegistration />} />
+              <Route path="/calendar" element={<Calander />} />
+            </Route>
+
             <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/events" element={<AdminEvents />} />

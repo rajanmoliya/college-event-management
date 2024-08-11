@@ -7,8 +7,16 @@ export const isTokenValid = (token) => {
     const decoded = jwtDecode(token);
     const currentTime = Date.now() / 1000;
 
-    return decoded.exp > currentTime;
+    if (decoded.exp > currentTime) {
+      return true;
+    } else {
+      // Token has expired, remove it from local storage
+      localStorage.removeItem("token");
+      return false;
+    }
   } catch (error) {
+    // In case of an error (e.g., malformed token), remove it from local storage
+    localStorage.removeItem("token");
     return false;
   }
 };

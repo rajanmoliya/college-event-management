@@ -8,12 +8,41 @@ import {
   FaTags,
   FaUsers,
 } from "react-icons/fa";
+import axios from "axios";
 
 /* eslint-disable */
-const EventCard = ({ event }) => {
+const EventCardUser = ({ event }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const toggleDescription = () => setShowFullDescription(!showFullDescription);
+
+  const [registrationMessage, setRegistrationMessage] = useState("");
+  const [isRegistered, setIsRegistered] = useState(false);
+  const handleRegisterForEvent = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/events/${
+          event._id
+        }/register`,
+        {},
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      console.log(response.data.message);
+      setIsRegistered(true);
+      setRegistrationMessage(response.data.message);
+      alert(response.data.message);
+    } catch (error) {
+      console.log("Catch error: " + error.response.data.message);
+      setIsRegistered(false);
+      setRegistrationMessage(error.response.data.message);
+      alert(error.response.data.message);
+    }
+  };
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-md">
@@ -55,15 +84,20 @@ const EventCard = ({ event }) => {
           </div>
         </div>
         <Link
-          to={`/admin/event-registrations/${event._id}`}
+          onClick={handleRegisterForEvent}
           className="text-blue-600 hover:text-blue-900 flex items-center justify-center mt-4 border-t pt-4 "
         >
           <FaUsers className="mr-2" />
-          View Registrations
+          Register
         </Link>
+        {isRegistered ? (
+          <p className="text-green-600 text-center">{registrationMessage}</p>
+        ) : (
+          <p className="text-red-600 text-center">{registrationMessage}</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default EventCard;
+export default EventCardUser;

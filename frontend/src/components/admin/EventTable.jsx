@@ -44,7 +44,7 @@ export const EventTable = ({ events, onEdit, onDelete }) => {
   }, [events, searchTerm, sortColumn, sortDirection]);
 
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="bg-white shadow-md rounded-lg overflow-hidden h-screen">
       <div className="p-4 bg-gray-50">
         <div className="relative">
           <input
