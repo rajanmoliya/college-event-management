@@ -26,7 +26,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
-connectDB();
+connectDB().catch((err) => console.error("MongoDB connection error:", err));
+
+// Health check route
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "OK", message: "API is running" });
+});
 
 // Routes
 app.use("/api/users", userRoutes);
@@ -36,14 +41,18 @@ app.use("/api/registrations", registrationRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
+  console.error("Server error:", err);
+  res
+    .status(500)
+    .json({ error: "Internal Server Error", message: err.message });
 });
 
-// Start server
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Start server if not running in production (Vercel)
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 7000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
