@@ -68,7 +68,7 @@ export const Register = () => {
       if (token) {
         localStorage.setItem("token", `Bearer ${token}`);
         console.log("Registration successful, token stored.");
-        navigate("/");
+        navigate("/login");
       } else {
         console.error("No token received from the server.");
       }
