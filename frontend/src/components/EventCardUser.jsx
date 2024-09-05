@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import {
@@ -10,20 +10,43 @@ import {
 } from "react-icons/fa";
 import axios from "axios";
 
-/* eslint-disable */
 const EventCardUser = ({ event }) => {
   const apiUrl = import.meta.env.PROD
     ? "https://cems.rajanmoliya.me"
     : import.meta.env.VITE_BACKEND_URL;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [registrationStatus, setRegistrationStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    fetchRegistrationStatus();
+  }, []);
+
+  const fetchRegistrationStatus = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/api/registrations/my`, {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      });
+      const registration = response.data.find(
+        (reg) => reg.event._id === event._id
+      );
+      setRegistrationStatus(registration ? registration.status : null);
+    } catch (error) {
+      console.error("Error fetching registration status:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const toggleDescription = () => setShowFullDescription(!showFullDescription);
 
-  const [registrationMessage, setRegistrationMessage] = useState("");
-  const [isRegistered, setIsRegistered] = useState(false);
   const handleRegisterForEvent = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.post(
         `${apiUrl}/api/users/events/${event._id}/register`,
         {},
@@ -33,16 +56,13 @@ const EventCardUser = ({ event }) => {
           },
         }
       );
-
-      console.log(response.data.message);
-      setIsRegistered(true);
-      setRegistrationMessage(response.data.message);
+      setRegistrationStatus("registered");
+      setMessage(response.data.message);
       alert(response.data.message);
     } catch (error) {
-      console.log("Catch error: " + error.response.data.message);
-      setIsRegistered(false);
-      setRegistrationMessage(error.response.data.message);
-      alert(error.response.data.message);
+      setMessage(error.response?.data?.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -52,7 +72,7 @@ const EventCardUser = ({ event }) => {
         <h3 className="text-2xl font-semibold text-gray-900 mb-3">
           {event.title}
         </h3>
-        <p className="text-gray-700 mb-5">
+        <p className="text-gray-700 mb-4">
           {showFullDescription
             ? event.description
             : `${event.description.substring(0, 100)}...`}
@@ -63,39 +83,41 @@ const EventCardUser = ({ event }) => {
             {showFullDescription ? "Read less" : "Read more"}
           </button>
         </p>
-        <div className="flex justify-between ">
-          <div className="flex items-center text-gray-600 mb-3">
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="flex items-center text-gray-600">
             <FaCalendarAlt className="mr-2" />
             <p>{format(new Date(event.date), "dd-MMM-yyyy")}</p>
           </div>
-          <div className="flex items-center text-gray-600 mb-3">
+          <div className="flex items-center text-gray-600">
             <FaClock className="mr-2" />
             <p>{event.time}</p>
           </div>
-        </div>
-        <div className="flex justify-between">
-          <div className="flex items-center text-gray-600 mb-3">
+          <div className="flex items-center text-gray-600">
             <FaMapMarkerAlt className="mr-2" />
             <p>{event.location}</p>
           </div>
-          <div className="flex items-center text-gray-600 mb-3 ">
+          <div className="flex items-center text-gray-600">
             <FaTags className="mr-2" />
             <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
               {event.category.split(",")[0]}
             </span>
           </div>
         </div>
-        <Link
-          onClick={handleRegisterForEvent}
-          className="text-blue-600 hover:text-blue-900 flex items-center justify-center mt-4 border-t pt-4 "
-        >
-          <FaUsers className="mr-2" />
-          Register
-        </Link>
-        {isRegistered ? (
-          <p className="text-green-600 text-center">{registrationMessage}</p>
+        {isLoading ? (
+          <p className="text-center text-gray-600">Loading...</p>
+        ) : registrationStatus === "registered" ? (
+          <p className="text-center text-green-600">
+            You are registered for this event.
+          </p>
         ) : (
-          <p className="text-red-600 text-center">{registrationMessage}</p>
+          <button
+            onClick={handleRegisterForEvent}
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+            disabled={isLoading}
+          >
+            <FaUsers className="mr-2" />
+            Register
+          </button>
         )}
       </div>
     </div>
