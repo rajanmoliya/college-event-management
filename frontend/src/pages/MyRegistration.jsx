@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil";
 import Navbar from "../components/Navbar";
 import { authState } from "../recoil/authState";
 import { LandingPage } from "../components/LandingPage";
+import { Registrations } from "../components/Registrations";
 
 export const MyRegistration = () => {
   const auth = useRecoilValue(authState);
@@ -14,7 +15,9 @@ export const MyRegistration = () => {
     <>
       <Navbar />
 
-      <div>My Registration Page</div>
+      <div className="bg-gray-100 ">
+        <Registrations />
+      </div>
     </>
   );
 };

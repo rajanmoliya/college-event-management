@@ -117,18 +117,18 @@ const AdminNavbar = () => {
                     id="dropdownAvatar"
                     className="absolute right-0 mt-2 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
                   >
-                    <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                    <div className="px-4 py-3 text-sm ">
                       <div>{user?.fullName}</div>
                       <div className="font-medium truncate">{user?.email}</div>
                     </div>
                     <ul
-                      className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      className="py-2 text-sm "
                       aria-labelledby="dropdownUserAvatarButton"
                     >
                       <li>
                         <Link
                           to={"/profile/settings"}
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          className="block px-4 py-2 hover:bg-gray-100 "
                         >
                           Profile Settings
                         </Link>
@@ -136,7 +136,7 @@ const AdminNavbar = () => {
                     </ul>
                     <div className="py-2">
                       <Link
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
                         onClick={handleLogout}
                       >
                         Log out
