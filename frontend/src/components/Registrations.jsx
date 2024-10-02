@@ -84,8 +84,10 @@ export const Registrations = () => {
 
   return (
     <div className="p-4 w-full">
-      <h1 className="text-4xl font-bold mb-5 text-center">My Registrations</h1>
-      <h2 className="text-2xl font-semibold mb-4 text-center">
+      <h1 className="text-4xl font-bold mb-5 text-center text-[#2563eb] ">
+        My Registrations
+      </h1>
+      <h2 className="text-xl font-semibold mb-4 text-center ">
         Events you registered for
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -95,7 +97,7 @@ export const Registrations = () => {
             className="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-md"
           >
             <div className="p-6">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-2xl font-extrabold text-gray-800 mb-3">
                 {registration.title}
               </h3>
               <p className="text-gray-700 mb-5">

@@ -47,9 +47,13 @@ export const Dashboard = () => {
       <>
         <Navbar />
         <div className="flex flex-col items-center  min-h-screen bg-gray-100 p-4">
-          <h1 className="text-4xl font-bold">SDJ EventHub</h1>
+          <h1 className="text-5xl font-extrabold text-[#2563eb] my-8">
+            SDJ EventHub
+          </h1>
 
-          <h2 className="text-2xl font-semibold my-4">All Events</h2>
+          <h2 className="text-2xl font-semibold my-4 border-b-2 border-[#2563eb]">
+            All Events
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {events.map((event) => (
               <EventCardUser key={event._id} event={event} />

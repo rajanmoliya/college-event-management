@@ -69,7 +69,7 @@ const EventCardUser = ({ event }) => {
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-md">
       <div className="p-6">
-        <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+        <h3 className="text-2xl font-extrabold text-gray-800 mb-3">
           {event.title}
         </h3>
         <p className="text-gray-700 mb-4">

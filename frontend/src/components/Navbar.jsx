@@ -3,7 +3,7 @@ import {
   ArrowRightStartOnRectangleIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../assets/logo.svg";
+import logo from "../assets/sdj.png";
 import { useEffect, useState } from "react";
 import fetchUser from "../api/fetchUser";
 import { useSetRecoilState } from "recoil";
@@ -30,9 +30,9 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Dashboard", path: "/" },
-    { name: "Events", path: "/events" },
+    // { name: "Events", path: "/events" },
     { name: "My Registrations", path: "/my-registrations" },
-    { name: "Calendar", path: "/calendar" },
+    // { name: "Calendar", path: "/calendar" },
   ];
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -120,7 +120,7 @@ const Navbar = () => {
                     <div>{user?.fullName}</div>
                     <div className="font-medium truncate">{user?.email}</div>
                   </div>
-                  <ul
+                  {/* <ul
                     className="py-2 text-sm "
                     aria-labelledby="dropdownUserAvatarButton"
                   >
@@ -132,7 +132,7 @@ const Navbar = () => {
                         Profile Settings
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                   <div className="py-2">
                     <Link
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "
