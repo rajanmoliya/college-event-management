@@ -69,7 +69,7 @@ export const LandingPage = () => {
           </h3>
           <ul className="list-disc list-inside text-gray-600 space-y-1">
             <li>Easy event creation and management</li>
-            <li>Discover exciting local events</li>
+            <li>Discover exciting college events</li>
             <li>Connect with like-minded people</li>
           </ul>
         </div>
