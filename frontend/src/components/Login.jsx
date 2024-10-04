@@ -69,8 +69,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 p-4">
-      <h2 className="text-2xl font-semibold mb-6">LOGIN</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-blue-500 p-4">
+      <h2 className="text-3xl font-extrabold mb-6 text-white">LOGIN</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
@@ -114,13 +114,13 @@ export const Login = () => {
         >
           {isLoading ? "Loading..." : "Login"}
         </button>
+        <p className="mt-4 text-center">
+          {"Don't have an account? "}
+          <Link to="/register" className="text-blue-500 hover:underline">
+            Register
+          </Link>
+        </p>
       </form>
-      <p className="mt-4">
-        {"Don't have an account? "}
-        <Link to="/register" className="text-blue-500 hover:underline">
-          Register
-        </Link>
-      </p>
     </div>
   );
 };

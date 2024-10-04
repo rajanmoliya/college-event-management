@@ -84,11 +84,11 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-blue-500 p-4">
       <div className="flex flex-col lg:flex-row items-center w-full max-w-4xl mb-6">
-        <h2 className="text-2xl font-semibold">REGISTER </h2>
+        <h2 className="text-3xl font-extrabold text-white">REGISTER </h2>
         <select
-          className="ml-0 lg:ml-4 mt-4 lg:mt-0 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="ml-0 lg:ml-4 mt-4 lg:mt-0 px-4 py-2 border border-blue-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
           {...register("role")}
           onChange={(e) => setRole(e.target.value)}
         >
