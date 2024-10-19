@@ -59,7 +59,7 @@ const EventCardUser = ({ event }) => {
       );
       setRegistrationStatus("registered");
       setMessage(response.data.message);
-      alert(response.data.message);
+      // alert(response.data.message);
     } catch (error) {
       setMessage(error.response?.data?.message || "An error occurred");
     } finally {
@@ -121,7 +121,7 @@ const EventCardUser = ({ event }) => {
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-500"></div>
           </div>
         ) : registrationStatus === "registered" ? (
-          <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded">
+          <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-2 rounded">
             <p className="font-bold">Registered</p>
           </div>
         ) : (
