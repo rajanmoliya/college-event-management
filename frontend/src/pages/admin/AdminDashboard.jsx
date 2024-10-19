@@ -43,7 +43,7 @@ export const AdminDashboard = () => {
     <>
       <AdminNavbar />
 
-      <div className="min-h-screen bg-gray-100 p-4">
+      <div className="min-h-screen bg-gradient-to-r from-blue-100 to-cyan-100 p-4">
         {loading ? (
           <div className="container mx-auto text-2xl font-bold mb-8">
             Loading...

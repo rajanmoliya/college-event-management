@@ -95,20 +95,22 @@ export const EventTable = ({ events, onEdit, onDelete }) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   {event.category}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap flex gap-2">
+                <td className="px-6 py-2 whitespace-nowrap flex gap-2">
                   <button
                     onClick={() => onEdit(event)}
-                    className="text-blue-700 hover:text-blue-900 mr-2"
+                    className="flex justify-center items-center text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-3 py-2.5  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 "
                     aria-label="Edit event"
                   >
-                    <FaEdit className="h-5 w-5" />
+                    EDIT
+                    <FaEdit className="h-4 w-4 ml-1" />
                   </button>
                   <button
                     onClick={() => onDelete(event._id)}
-                    className="text-red-700 hover:text-red-900"
+                    className="flex justify-center items-center text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-3 py-2.5 mb-2 dark:bg-red-600 dark:hover:bg-red-700 "
                     aria-label="Delete event"
                   >
-                    <FaTrash className="h-5 w-5" />
+                    DELETE
+                    <FaTrash className="h-4 w-4 ml-1" />
                   </button>
                 </td>
               </tr>

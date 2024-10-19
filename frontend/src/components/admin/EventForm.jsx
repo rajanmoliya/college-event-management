@@ -1,7 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { format, parse } from "date-fns";
-import { useEffect, useState } from "react";
 
-/* eslint-disable */
 export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     title: "",
@@ -45,7 +44,6 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
-    // Clear the form after submission
     setFormData({
       title: "",
       description: "",
@@ -59,17 +57,20 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 "
+      className="bg-white shadow-lg rounded-xl px-8 pt-6 pb-8 mb-4  w-full"
     >
-      <div className="mb-4">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        {isEditing ? "Edit Event" : "Create New Event"}
+      </h2>
+      <div className="mb-6">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-gray-700 text-sm font-semibold mb-2"
           htmlFor="title"
         >
           Title
         </label>
         <input
-          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+          className="border-2 border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
           id="title"
           type="text"
           name="title"
@@ -78,111 +79,109 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
           required
         />
       </div>
-      <div className="mb-4">
+      <div className="mb-6">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-gray-700 text-sm font-semibold mb-2"
           htmlFor="description"
         >
           Description
         </label>
         <textarea
-          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
+          className="border-2 border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
           id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
           required
+          rows="4"
         />
       </div>
-      <div className="flex gap-8">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2 w-full"
-          htmlFor="date"
-        >
-          Date
-        </label>
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2 w-full"
-          htmlFor="time"
-        >
-          Time
-        </label>
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            className="block text-gray-700 text-sm font-semibold mb-2"
+            htmlFor="date"
+          >
+            Date
+          </label>
+          <input
+            className="border-2 border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+            id="date"
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="w-full md:w-1/2 px-3">
+          <label
+            className="block text-gray-700 text-sm font-semibold mb-2"
+            htmlFor="time"
+          >
+            Time
+          </label>
+          <input
+            className="border-2 border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+            id="time"
+            type="time"
+            name="time"
+            value={
+              formData.time
+                ? format(parse(formData.time, "hh:mm a", new Date()), "HH:mm")
+                : ""
+            }
+            onChange={handleChange}
+            required
+          />
+        </div>
       </div>
-
-      <div className="mb-4 flex gap-8">
-        <input
-          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-          id="date"
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-          id="time"
-          type="time"
-          name="time"
-          value={
-            formData.time
-              ? format(parse(formData.time, "hh:mm a", new Date()), "HH:mm")
-              : ""
-          }
-          onChange={handleChange}
-          required
-        />
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            className="block text-gray-700 text-sm font-semibold mb-2"
+            htmlFor="location"
+          >
+            Location
+          </label>
+          <input
+            className="border-2 border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+            id="location"
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="w-full md:w-1/2 px-3">
+          <label
+            className="block text-gray-700 text-sm font-semibold mb-2"
+            htmlFor="category"
+          >
+            Category
+          </label>
+          <input
+            className="border-2 border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 transition duration-300"
+            id="category"
+            type="text"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            required
+          />
+        </div>
       </div>
-
-      <div className="flex gap-8">
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2 w-full"
-          htmlFor="location"
-        >
-          Location
-        </label>
-
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2 w-full"
-          htmlFor="category"
-        >
-          Category
-        </label>
-      </div>
-
-      <div className="mb-4 flex gap-8">
-        <input
-          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-          id="location"
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-blue-500"
-          id="category"
-          type="text"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="flex items-center justify-center gap-8 mt-8">
+      <div className="flex items-center justify-between mt-8">
         <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
           type="button"
           onClick={onCancel}
         >
           Cancel
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
           type="submit"
         >
           {isEditing ? "Update Event" : "Create Event"}
@@ -191,3 +190,5 @@ export const EventForm = ({ event, isEditing, onSubmit, onCancel }) => {
     </form>
   );
 };
+
+export default EventForm;

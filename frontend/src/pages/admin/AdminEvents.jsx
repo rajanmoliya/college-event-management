@@ -77,7 +77,7 @@ export const AdminEvents = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="min-h-screen bg-gray-100 p-4">
+      <div className="min-h-screen bg-gradient-to-r from-blue-100 to-cyan-100 p-4">
         <div className="container mx-auto">
           <h1 className="text-3xl font-bold mb-8">Admin Event Management</h1>
 

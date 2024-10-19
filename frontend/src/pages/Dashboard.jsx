@@ -46,7 +46,7 @@ export const Dashboard = () => {
     return (
       <>
         <Navbar />
-        <div className="flex flex-col items-center  min-h-screen bg-gray-100 p-4">
+        <div className="flex flex-col items-center  min-h-screen p-4 bg-gradient-to-r from-blue-100 to-cyan-100">
           <h1 className="text-5xl font-extrabold text-[#2563eb] my-8">
             SDJ EventHub
           </h1>

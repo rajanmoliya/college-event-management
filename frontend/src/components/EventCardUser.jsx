@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   FaCalendarAlt,
   FaClock,
   FaMapMarkerAlt,
   FaTags,
   FaUsers,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
-import axios from "axios";
 
 const EventCardUser = ({ event }) => {
   const apiUrl = import.meta.env.PROD
@@ -67,57 +68,74 @@ const EventCardUser = ({ event }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-md">
-      <div className="p-6">
-        <h3 className="text-2xl font-extrabold text-gray-800 mb-3">
+    <div className="bg-white shadow-lg rounded-xl overflow-hidden w-full max-w-md transition-all duration-300 ease-in-out ">
+      <div className="bg-gradient-to-r from-blue-800 to-blue-700 p-4">
+        <h3 className="text-2xl font-bold text-white mb-2 truncate">
           {event.title}
         </h3>
-        <p className="text-gray-700 mb-4">
-          {showFullDescription
-            ? event.description
-            : `${event.description.substring(0, 100)}...`}
-          <button
-            onClick={toggleDescription}
-            className="text-blue-600 hover:text-blue-900 ml-2"
-          >
-            {showFullDescription ? "Read less" : "Read more"}
-          </button>
-        </p>
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="flex items-center text-gray-600">
+        <div className="flex justify-between text-white text-sm">
+          <div className="flex items-center">
             <FaCalendarAlt className="mr-2" />
-            <p>{format(new Date(event.date), "dd-MMM-yyyy")}</p>
+            <p>{format(new Date(event.date), "dd MMM yyyy")}</p>
           </div>
-          <div className="flex items-center text-gray-600">
+          <div className="flex items-center">
             <FaClock className="mr-2" />
             <p>{event.time}</p>
           </div>
+        </div>
+      </div>
+      <div className="p-6">
+        <p className="text-gray-700 mb-4 transition-all duration-300 ease-in-out">
+          {showFullDescription
+            ? event.description
+            : `${event.description.substring(0, 95)}...`}
+        </p>
+        <button
+          onClick={toggleDescription}
+          className="text-indigo-600 hover:text-indigo-800 flex items-center mb-4 transition-all duration-300 ease-in-out"
+        >
+          {showFullDescription ? (
+            <>
+              Read less <FaChevronUp className="ml-1" />
+            </>
+          ) : (
+            <>
+              Read more <FaChevronDown className="ml-1" />
+            </>
+          )}
+        </button>
+        <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="flex items-center text-gray-600">
-            <FaMapMarkerAlt className="mr-2" />
+            <FaMapMarkerAlt className="mr-2 text-red-500" />
             <p>{event.location}</p>
           </div>
           <div className="flex items-center text-gray-600">
-            <FaTags className="mr-2" />
-            <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+            <FaTags className="mr-2 text-green-500" />
+            <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
               {event.category.split(",")[0]}
             </span>
           </div>
         </div>
         {isLoading ? (
-          <p className="text-center text-gray-600">Loading...</p>
+          <div className="flex justify-center items-center py-2">
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-500"></div>
+          </div>
         ) : registrationStatus === "registered" ? (
-          <p className="text-center text-green-600">
-            You are registered for this event.
-          </p>
+          <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded">
+            <p className="font-bold">Registered</p>
+          </div>
         ) : (
           <button
             onClick={handleRegisterForEvent}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center justify-center transition-all duration-300 ease-in-out hover:shadow-xl hover:scale-105"
             disabled={isLoading}
           >
             <FaUsers className="mr-2" />
-            Register
+            <span className="font-semibold">REGISTER</span>
           </button>
+        )}
+        {message && (
+          <p className="text-center text-sm text-gray-600 mt-2">{message}</p>
         )}
       </div>
     </div>
