@@ -57,7 +57,7 @@ export const Registrations = () => {
         }
       );
 
-      alert(response.data.message);
+      // alert(response.data.message);
       setRegistrations((prev) =>
         prev.filter((registration) => registration._id !== eventId)
       );
